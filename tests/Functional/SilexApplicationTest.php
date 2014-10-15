@@ -112,7 +112,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client($app);
         $client->request('GET', $resource, [], [], [
-                'HTTP_AUTHORIZATION' => 'invalid'
+            'HTTP_AUTHORIZATION' => 'invalid'
         ]);
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
@@ -129,7 +129,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client($app);
         $client->request('GET', $resource, [], [], [
-                'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->invalidToken())
+            'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->invalidToken())
         ]);
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
@@ -146,7 +146,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client($app);
         $client->request('GET', $resource, [], [], [
-                'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->expiredToken())
+            'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->expiredToken())
         ]);
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
@@ -163,7 +163,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client($app);
         $client->request('GET', $resource, [], [], [
-                'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->validToken())
+            'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->validToken())
         ]);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
