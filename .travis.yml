@@ -11,7 +11,7 @@ before_install:
 
 install:
   - composer install --dev --prefer-source
-  - composer require satooshi/php-coveralls:dev-master --no-update
+  - composer require satooshi/php-coveralls:dev-master
 
 script:
   - phpunit -v --coverage-text --coverage-clover ./build/logs/clover.xml
