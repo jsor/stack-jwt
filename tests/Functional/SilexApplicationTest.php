@@ -195,6 +195,39 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_converts_WwwAuthenticateStack_to_bearer_for_unsupported_authorization()
+    {
+        $authz = function(
+            HttpKernelInterface $app,
+            Request $request,
+            $type = HttpKernelInterface::MASTER_REQUEST,
+            $catch = true
+        ) {
+            // Simulate Authorization failure by returning 401 status
+            // code with WWW-Authenticate: Stack.
+            return new Response('', 401, [
+                'WWW-Authenticate' => 'Stack'
+            ]);
+        };
+
+        $app = $this->decorate(new Inline($this->application(), $authz), [
+            'firewall' => [
+                [
+                    'path' => '/protected/resource',
+                    'anonymous' => true
+                ],
+            ]
+        ]);
+
+        $client = new Client($app);
+        $client->request('GET', '/protected/resource', [], [], [
+            'HTTP_AUTHORIZATION' => 'Foo bar'
+        ]);
+
+        $this->assertEquals('Bearer', $client->getResponse()->headers->get('WWW-Authenticate'));
+    }
+
+    /** @test */
     public function it_does_not_clobber_existing_token()
     {
         $authnMiddleware = function(

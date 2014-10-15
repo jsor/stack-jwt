@@ -3,6 +3,7 @@
 namespace Jsor\Stack;
 
 use Dflydev\Stack\Firewall;
+use Dflydev\Stack\WwwAuthenticateStackChallenge;
 use Namshi\JOSE\JWS;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +34,15 @@ class JWT implements HttpKernelInterface
             return $response;
         };
 
-        $authenticate = function ($app) use ($request, $type, $catch, $challenge) {
+        $authenticate = function ($app, $anonymous) use ($request, $type, $catch, $challenge) {
             $header = $request->headers->get('authorization');
 
             if (!preg_match('/^Bearer (.+)$/i', $header, $matches)) {
+                if ($anonymous) {
+                    return (new WwwAuthenticateStackChallenge($app, $challenge))
+                        ->handle($request, $type, $catch);
+                }
+
                 return $challenge(
                     new Response('Invalid Authorization header (Format is: "Authorization: Bearer [token]")', 400),
                     'invalid_request'
