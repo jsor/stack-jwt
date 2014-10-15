@@ -1,0 +1,37 @@
+{
+    "name": "jsor/stack-validToken",
+    "description": "JSON Web Token (JWT) Stack middleware.",
+    "keywords": ["stack", "stack-2", "stackphp", "validToken", "authentication", "rest"],
+    "homepage": "https://github.com/jsor/stack-validToken",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Sorgalla",
+            "email": "jsorgalla@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "dflydev/stack-authentication": "~1.0@dev",
+        "dflydev/stack-firewall": "~1.0@dev",
+        "namshi/jose": "~1.0",
+        "symfony/http-foundation": "~2.1",
+        "symfony/http-kernel": "~2.1"
+    },
+    "require-dev": {
+        "php": ">=5.4.0",
+        "silex/silex": "~2.0@dev",
+        "stack/inline": "~1.0@dev",
+        "symfony/browser-kit": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jsor\\Stack\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
