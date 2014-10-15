@@ -206,7 +206,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
             // We are going to claim that we authenticated...
             $request->attributes->set('stack.authn.token', 'foo');
 
-            // Hawk should actually capture the WWW-Authenticate: Stack response
+            // JWT should actually capture the WWW-Authenticate: Stack response
             // and challenge on its own.
             return $app->handle($request, $type, $catch);
         };
@@ -231,7 +231,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
             // We are going to claim that we authenticated...
             $request->attributes->set('stack.authn.token', 'foo');
 
-            // Hawk should actually capture the WWW-Authenticate: Stack response
+            // JWT should actually capture the WWW-Authenticate: Stack response
             // and challenge on its own.
             return $app->handle($request, $type, $catch);
         };
