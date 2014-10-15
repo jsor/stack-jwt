@@ -1,6 +1,6 @@
 <?php
 
-namespace Jsor\Stack\JWT;
+namespace Jsor\Stack\Functional;
 
 use Jsor\Stack\JWT;
 use Namshi\JOSE\JWS;
