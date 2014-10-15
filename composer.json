@@ -1,8 +1,8 @@
 {
-    "name": "jsor/stack-validToken",
+    "name": "jsor/stack-jwt",
     "description": "JSON Web Token (JWT) Stack middleware.",
-    "keywords": ["stack", "stack-2", "stackphp", "validToken", "authentication", "rest"],
-    "homepage": "https://github.com/jsor/stack-validToken",
+    "keywords": ["stack", "stack-2", "stackphp", "jwt", "authentication", "rest"],
+    "homepage": "https://github.com/jsor/stack-jwt",
     "license": "MIT",
     "authors": [
         {
