@@ -10,7 +10,7 @@ middleware for [Stack](http://stackphp.com).
 Installation
 ------------
 
-Install the latest version [through composer](http://getcomposer.org):
+Install the latest version with [composer](http://getcomposer.org):
 
 ```bash
 composer require jsor/stack-jwt
@@ -22,4 +22,4 @@ all available versions.
 License
 -------
 
-Stack/Hal is released under the[MIT](https://github.com/jsor/stack-jwt/blob/master/LICENSE) license.
+Stack/JWT is released under the [MIT](https://github.com/jsor/stack-jwt/blob/master/LICENSE) license.
