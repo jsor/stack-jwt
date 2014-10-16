@@ -66,7 +66,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         $client->request('GET', '/protected/resource');
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /** @test */
@@ -99,7 +99,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         $client->request('GET', $resource, [], [], []);
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /**
@@ -116,7 +116,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer error="invalid_request"', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test" error="invalid_request"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /**
@@ -133,7 +133,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer error="invalid_token"', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test" error="invalid_token"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /**
@@ -150,7 +150,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer error="invalid_token"', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test" error="invalid_token"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /**
@@ -191,7 +191,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         $client = new Client($app);
         $client->request('GET', '/');
 
-        $this->assertEquals('Bearer', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /** @test */
@@ -224,7 +224,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
             'HTTP_AUTHORIZATION' => 'Foo bar'
         ]);
 
-        $this->assertEquals('Bearer', $client->getResponse()->headers->get('WWW-Authenticate'));
+        $this->assertEquals('Bearer realm="test"', $client->getResponse()->headers->get('WWW-Authenticate'));
     }
 
     /** @test */
@@ -289,7 +289,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         $client->request('GET', '/protected/token');
 
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
-        $this->assertEquals('Bearer', $client->getResponse()->headers->get('www-authenticate'));
+        $this->assertEquals('Bearer realm="test"', $client->getResponse()->headers->get('www-authenticate'));
     }
 
     protected function payload()
@@ -376,6 +376,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
     protected function decorate(HttpKernelInterface $app, array $config = [])
     {
         $config = array_merge([
+            'realm' => 'test',
             'key_provider' => function () {
                 return 's3cr3t';
             }

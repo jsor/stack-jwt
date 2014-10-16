@@ -25,6 +25,10 @@ class JWT implements HttpKernelInterface
         $challenge = function (Response $response, $error = null) {
             $value = 'Bearer';
 
+            if (isset($this->options['realm'])) {
+                $value .= sprintf(' realm="%s"', $this->options['realm']);
+            }
+
             if ($error) {
                 $value .= sprintf(' error="%s"', $error);
             }
