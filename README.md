@@ -5,7 +5,8 @@ Stack/JWT
 [![Coverage Status](https://img.shields.io/coveralls/jsor/stack-jwt.svg)](https://coveralls.io/r/jsor/stack-jwt)
 
 [JSON Web Token](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token) (JWT)
-middleware for [Stack](http://stackphp.com).
+middleware for [Stack](http://stackphp.com) following the
+[STACK-2 Authentication](http://stackphp.com/specs/STACK-2/) conventions.
 
 Installation
 ------------
