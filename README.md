@@ -2,7 +2,7 @@ Stack/JWT
 =========
 
 [![Build Status](https://secure.travis-ci.org/jsor/stack-jwt.svg?branch=master)](http://travis-ci.org/jsor/stack-jwt)
-[![Coverage Status](https://img.shields.io/coveralls/jsor/stack-jwt.svg)](https://coveralls.io/r/jsor/stack-jwt)
+[![Coverage Status](https://img.shields.io/coveralls/jsor/stack-jwt.svg?style=flat)](https://coveralls.io/r/jsor/stack-jwt)
 
 [JSON Web Token](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token) (JWT)
 middleware for [Stack](http://stackphp.com) following the
