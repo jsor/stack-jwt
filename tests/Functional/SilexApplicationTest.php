@@ -253,7 +253,7 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** * @test */
-    public function shouldChallengeOnAuthorizationEvenIfOtherMiddlewareAuthenticated()
+    public function it_challenges_on_authorization_even_if_other_middleware_authenticated()
     {
         $authnMiddleware = function(
             HttpKernelInterface $app,
