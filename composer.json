@@ -19,7 +19,7 @@
         "symfony/http-kernel": "~2.1"
     },
     "require-dev": {
-        "silex/silex": "~2.0@dev",
+        "silex/silex": "~1.0@dev",
         "stack/inline": "~1.0@dev",
         "symfony/browser-kit": "~2.1"
     },
