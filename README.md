@@ -23,4 +23,4 @@ all available versions.
 License
 -------
 
-Stack/JWT is released under the [MIT](https://github.com/jsor/stack-jwt/blob/master/LICENSE) license.
+Copyright (c) 2014-2015 Jan Sorgalla. Released under the [MIT](https://github.com/jsor/stack-jwt/blob/master/LICENSE) license.
