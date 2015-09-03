@@ -14,7 +14,7 @@
         "php": ">=5.4.0",
         "dflydev/stack-authentication": "~1.0@dev",
         "dflydev/stack-firewall": "~1.0@dev",
-        "namshi/jose": "~1.0",
+        "namshi/jose": "~6.0",
         "symfony/http-foundation": "~2.1",
         "symfony/http-kernel": "~2.1"
     },
