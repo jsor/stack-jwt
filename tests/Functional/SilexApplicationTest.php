@@ -3,7 +3,7 @@
 namespace Jsor\Stack\Functional;
 
 use Jsor\Stack\JWT;
-use Namshi\JOSE\JWS;
+use Namshi\JOSE\SimpleJWS;
 use Silex\Application;
 use Stack\Inline;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -302,7 +302,9 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
     protected function validToken()
     {
-        $jws  = new JWS('HS256');
+        $jws  = new SimpleJWS([
+            'alg' => 'HS256'
+        ]);
 
         $jws->setPayload($this->payload());
         $jws->sign('s3cr3t');
@@ -312,7 +314,9 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
     protected function expiredToken()
     {
-        $jws  = new JWS('HS256');
+        $jws  = new SimpleJWS([
+            'alg' => 'HS256'
+        ]);
 
         $jws->setPayload(['exp' => (new \DateTime('yesterday'))->format('U')] + $this->payload());
         $jws->sign('s3cr3t');

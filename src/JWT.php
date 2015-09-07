@@ -4,7 +4,7 @@ namespace Jsor\Stack;
 
 use Dflydev\Stack\Firewall;
 use Dflydev\Stack\WwwAuthenticateStackChallenge;
-use Namshi\JOSE\JWS;
+use Namshi\JOSE\SimpleJWS;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -56,7 +56,7 @@ class JWT implements HttpKernelInterface
             $token = $matches[1];
 
             try {
-                $jws = JWS::load($token);
+                $jws = SimpleJWS::load($token);
             } catch (\InvalidArgumentException $e) {
                 return $challenge(
                     new Response('Invalid JSON Web Token', 401),
