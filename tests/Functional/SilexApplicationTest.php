@@ -109,6 +109,31 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+
+    /** @test */
+    public function it_passes_payload_to_token_translator()
+    {
+        $iat = time();
+
+        $mock = $this->getMock('Jsor\\Stack\\Stub\\CallableStub');
+        $mock
+            ->expects($this->once())
+            ->method('__invoke')
+            ->with(['iat' => $iat] + $this->payload())
+            ->will($this->returnValue('foo'));
+
+        $app = $this->createDecoratedApplication([
+            'token_translator' => $mock
+        ]);
+
+        $client = new Client($app);
+        $client->request('GET', '/protected/token', [], [], [
+            'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->validToken(['iat' => $iat]))
+        ]);
+
+        $this->assertSame('foo', $client->getRequest()->attributes->get('stack.authn.token'));
+    }
+
     /**
      * @test
      * @dataProvider provideProtectedAndUnprotectedResources
