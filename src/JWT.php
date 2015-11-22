@@ -64,7 +64,7 @@ class JWT implements HttpKernelInterface
                 );
             }
 
-            if (!$jws->isValid($this->options['key_provider']())) {
+            if (!$jws->isValid($this->options['key_provider']($jws->getPayload()))) {
                 return $challenge(
                     new Response('Invalid JSON Web Token', 401),
                     'invalid_token'
