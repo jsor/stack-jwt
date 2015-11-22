@@ -3,6 +3,7 @@
 namespace Jsor\Stack\Functional;
 
 use Jsor\Stack\JWT;
+use Jsor\Stack\Stub\CallableStub;
 use Namshi\JOSE\SimpleJWS;
 use Silex\Application;
 use Stack\Inline;
@@ -84,6 +85,28 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame($this->payload(), $payload);
+    }
+
+    /** @test */
+    public function it_passes_payload_to_key_provider()
+    {
+        $iat = time();
+
+        $mock = $this->getMock('Jsor\\Stack\\Stub\\CallableStub');
+        $mock
+            ->expects($this->once())
+            ->method('__invoke')
+            ->with(['iat' => $iat] + $this->payload())
+            ->will($this->returnValue('s3cr3t'));
+
+        $app = $this->createDecoratedApplication([
+            'key_provider' => $mock
+        ]);
+
+        $client = new Client($app);
+        $client->request('GET', '/protected/token', [], [], [
+            'HTTP_AUTHORIZATION' => sprintf('Bearer %s', $this->validToken(['iat' => $iat]))
+        ]);
     }
 
     /**
@@ -300,13 +323,13 @@ class SilexApplicationTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    protected function validToken()
+    protected function validToken(array $payload = [])
     {
         $jws  = new SimpleJWS([
             'alg' => 'HS256'
         ]);
 
-        $jws->setPayload($this->payload());
+        $jws->setPayload(array_merge($this->payload(), $payload));
         $jws->sign('s3cr3t');
 
         return $jws->getTokenString();

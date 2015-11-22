@@ -28,6 +28,11 @@
             "Jsor\\Stack\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Jsor\\Stack\\": "tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0-dev"
