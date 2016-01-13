@@ -13,19 +13,7 @@ matrix:
   include:
     - php: 5.4
       env: dependencies=lowest
-    - php: 5.5
-      env: dependencies=lowest
-    - php: 5.6
-      env: dependencies=lowest
-    - php: 7.0
-      env: dependencies=lowest
-    - php: hhvm
-      env: dependencies=lowest
   fast_finish: true
-
-env:
-  global:
-    - dependencies=highest
 
 cache:
   directories:
@@ -39,7 +27,6 @@ before_install:
 install:
   - if [ -z "$dependencies" ]; then travis_retry composer install --no-interaction; fi;
   - if [ "$dependencies" = "lowest" ]; then travis_retry composer update --prefer-lowest --no-interaction; fi;
-  - if [ "$dependencies" = "highest" ]; then travis_retry composer update --no-interaction; fi;
   - composer show -i
 
 script:
